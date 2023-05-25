@@ -2103,6 +2103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835983206}
+  - component: {fileID: 1835983209}
   - component: {fileID: 1835983208}
   m_Layer: 8
   m_Name: Screws
@@ -2144,6 +2145,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 7be242ef8ef38384e83b96db712b2468, type: 2}
   transitionTime: 0.5
+--- !u!114 &1835983209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835983205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19a7c86f59980643afba486c6bde7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAllScrewsDeactivated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_CallsDirty: 1
+  totalScrews: 0
+  deactivatedScrews: 0
 --- !u!1 &1854441858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,6 +2757,7 @@ GameObject:
   - component: {fileID: 5524149942799408369}
   - component: {fileID: 1562308416380647232}
   - component: {fileID: 8989458793693344830}
+  - component: {fileID: 8989458793693344831}
   m_Layer: 7
   m_Name: EngineBack
   m_TagString: Untagged
@@ -2978,6 +2998,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8989458793693344831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148428832330642420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a84d58aa1edab40a7ab0a2bcd0b992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seeThroughSphere: {fileID: 0}
 --- !u!1 &9065136287866205966
 GameObject:
   m_ObjectHideFlags: 0
