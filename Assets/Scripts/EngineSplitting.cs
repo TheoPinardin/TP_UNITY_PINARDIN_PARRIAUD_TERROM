@@ -8,36 +8,88 @@ public class EngineSplitting : MonoBehaviour
     public GameObject Exhaust;
     public GameObject Core;
     public GameObject Rotor;
+    public bool SplitEngi;
+    public bool isSplitting;
+    public Vector3 targetPosB;
+    public Vector3 targetPosC;
+    public Vector3 targetPosE;
+    public Vector3 targetPosR;
 
-    public float moveDistance = 1.0f; // Distance de déplacement des objets
-    public float moveDuration = 2.0f; // Durée du mouvement des objets
+    public Vector3 initialPosB;
+    public Vector3 initialPosC;
+    public Vector3 initialPosE;
+    public Vector3 initialPosR;
 
-    private float moveTimer = 0.0f; // Timer pour suivre la progression du mouvement
 
-    private void Update()
+    public float moveDistance = 0.1f; // Distance de déplacement des objets
+    public float duration= 0.5f; // Durée du mouvement des objets
+
+    private float elapsedTime = 0.0f; // Timer pour suivre la progression du mouvement
+
+    private void Start()
     {
-        // Vérifier si le mouvement est terminé
-        if (moveTimer >= moveDuration)
-            return;
+        ScrewManager screwManager = FindObjectOfType<ScrewManager>();
 
-        // Calculer la progression du mouvement
-        moveTimer += Time.deltaTime;
-        float t = Mathf.SmoothStep(0.0f, 1.0f, moveTimer / moveDuration);
+        if (screwManager != null)
+        {
+            screwManager.m_MyEvent.AddListener(StartEngineSplitting);
+        }   
 
-        // Appliquer le mouvement aux objets
-        MoveObject(Back, t);
-        MoveObject(Exhaust, t);
-        MoveObject(Core, t);
-        MoveObject(Rotor, t);
+        initialPosB = Back.transform.position;
+        initialPosE = Exhaust.transform.position;
+        initialPosC = Core.transform.position;
+        initialPosR = Rotor.transform.position;
+
+        targetPosB = initialPosB + new Vector3(-1f, 0f, 0f);
+        targetPosE = initialPosE + new Vector3(-0.5f, 0f, 0f);
+        targetPosC = initialPosC + new Vector3(0.8f, 0f, 0f);
+        targetPosR = initialPosR + new Vector3(2f, 0f, 0f);
+    }
+private void Update()
+    {
+        if (isSplitting)
+        {
+            // Mettez à jour le temps écoulé
+            elapsedTime += Time.deltaTime;
+
+            // Calculez le facteur d'interpolation en utilisant la fonction d'interpolation souhaitée (ease-in/out)
+            float t = SmoothStep(0f, 1f, elapsedTime / duration);
+
+            // Effectuez la séparation progressive des parties du moteur en utilisant l'interpolation lerp
+            Back.transform.position = Vector3.Lerp(initialPosB, targetPosB, t);
+            Exhaust.transform.position = Vector3.Lerp(initialPosE, targetPosE, t);
+            Core.transform.position = Vector3.Lerp(initialPosC, targetPosC, t);
+            Rotor.transform.position = Vector3.Lerp(initialPosR, targetPosR, t);
+
+            if (t >= 1f)
+            {
+                // La séparation est terminée, désactivez l'écoute de l'événement
+                ScrewManager screwManager = FindObjectOfType<ScrewManager>();
+
+                if (screwManager != null)
+                {
+                    screwManager.m_MyEvent.RemoveListener(StartEngineSplitting);
+                }
+
+                isSplitting = false;
+            }
+        }
     }
 
-    private void MoveObject(GameObject obj, float t)
+    private void StartEngineSplitting()
     {
-        // Calculer la position cible en fonction de la distance et de la progression du mouvement
-        float targetX = obj.transform.position.x + moveDistance;
-        Vector3 targetPosition = new Vector3(targetX, obj.transform.position.y, obj.transform.position.z);
+        isSplitting = true;
+    }
 
-        // Interpoler la position actuelle vers la position cible
-        obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, t);
+    private float SmoothStep(float edge0, float edge1, float x)
+    {
+        x = Mathf.Clamp01(x);
+        x = x * x * (3f - 2f * x);
+        return Mathf.Lerp(edge0, edge1, x);
+    }
+
+    public void isSplittingBool(bool a)
+    {
+        isSplitting = a;
     }
 }

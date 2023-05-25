@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   m_Layer: 0
@@ -944,6 +945,25 @@ MonoBehaviour:
   maxYPosition: 2
   minYPosition: -2
   rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb20262fd421874468d46b25416ca840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screw1: {fileID: 2572572965311932531}
+  screw2: {fileID: 4934954031498244622}
+  screw3: {fileID: 8912529819697343375}
+  screw4: {fileID: 9065136287866205966}
+  m_MyEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,13 +2064,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 919132148076603299}
+        m_TargetAssemblyTypeName: EngineSplitting, Assembly-CSharp
+        m_MethodName: isSplittingBool
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2157,12 +2177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19a7c86f59980643afba486c6bde7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnAllScrewsDeactivated:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  totalScrews: 0
-  deactivatedScrews: 0
 --- !u!1 &1854441858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,6 +2407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652530916634}
   - component: {fileID: 919132148076603298}
+  - component: {fileID: 919132148076603299}
   m_Layer: 6
   m_Name: Engine
   m_TagString: Untagged
@@ -2416,6 +2431,34 @@ MonoBehaviour:
   maxRotorSpeed: 360
   rotor: {fileID: 2949645817024321547}
   exhaustMaterial: {fileID: 2100000, guid: b2f22ebab713e7b4f90a44efd18b7f9a, type: 2}
+--- !u!114 &919132148076603299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148076603296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef36519a8ab47d47a18b4e919586e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Back: {fileID: 6148428832330642420}
+  Exhaust: {fileID: 7093761088783857399}
+  Core: {fileID: 5832302806949286855}
+  Rotor: {fileID: 3243948320479498162}
+  SplitEngi: 0
+  isSplitting: 0
+  targetPosB: {x: 0, y: 0, z: 0}
+  targetPosC: {x: 0, y: 0, z: 0}
+  targetPosE: {x: 0, y: 0, z: 0}
+  targetPosR: {x: 0, y: 0, z: 0}
+  initialPosB: {x: 0, y: 0, z: 0}
+  initialPosC: {x: 0, y: 0, z: 0}
+  initialPosE: {x: 0, y: 0, z: 0}
+  initialPosR: {x: 0, y: 0, z: 0}
+  moveDistance: 1
+  duration: 0.5
 --- !u!33 &1562308416380647232
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2758,6 +2801,7 @@ GameObject:
   - component: {fileID: 1562308416380647232}
   - component: {fileID: 8989458793693344830}
   - component: {fileID: 8989458793693344831}
+  - component: {fileID: 8989458793693344832}
   m_Layer: 7
   m_Name: EngineBack
   m_TagString: Untagged
@@ -3010,7 +3054,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a84d58aa1edab40a7ab0a2bcd0b992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeThroughSphere: {fileID: 0}
+  seeThroughSphere: {fileID: 3044514948961660494, guid: e05308e2b1c7da74c90a482e3934bd8f,
+    type: 3}
+--- !u!64 &8989458793693344832
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148428832330642420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1085177370303390594, guid: 57e70af6dcae603429a9b4005b7f1026, type: 3}
 --- !u!1 &9065136287866205966
 GameObject:
   m_ObjectHideFlags: 0
